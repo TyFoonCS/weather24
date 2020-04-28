@@ -1,7 +1,8 @@
 import flask
+import sqlite3
+import random
 import logging
 import requests
-import random
 import json
 from datetime import datetime
 import time
@@ -157,8 +158,21 @@ def main():
     return resp
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def wet():
+    wish = False
+    conn = sqlite3.connect("data.db")
+    cursor = conn.cursor()
+
+    if flask.request.method == 'POST':
+        wish = mat_filter(flask.request.form.get('wish'))
+        cursor.execute("insert into wishes values('" + wish + "');")
+        conn.commit()
+    if not wish:
+        cursor.execute("select * from wishes")
+        wishes = cursor.fetchall()[0]
+        wish = random.choice(wishes)
+
     weather = now['fact']
     date = '.'.join(now['date'][:10].split('-')[::-1])
 
@@ -182,7 +196,8 @@ def wet():
                                  card=card,
                                  back=back,
                                  font=font,
-                                 icon=weather['icon']
+                                 icon=weather['icon'],
+                                 wish=wish
                                  )
 
 

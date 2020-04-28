@@ -85,13 +85,13 @@
         <div class=" {{ card }} ">
         <div class="card-image">
             <img src=" {{ alerts_back }} " class="alert_img">
-            <span class="card-title">Card Title</span>
+            <span class="card-title"> {{ wish }} </span>
         </div>
         <div class="card-content">
             <div class="row">
-                <form>
+                <form action="" method="post">
                     <div class="input-field col s10 m11">
-                        <input id="rec_input" type="text" data-length="100">
+                        <input id="rec_input" type="text" data-length="100" name="wish">
                         <label for="rec_input">Ваше пожелание</label>
                     </div>
                     <div class="col s2 m1">
