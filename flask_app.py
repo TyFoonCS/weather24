@@ -179,7 +179,6 @@ def wet():
         wish = random.choice(now_wish['wishes'].split(';;'))
         print(wish)
 
-
     weather = now['fact']
     date = '.'.join(now['date'][:10].split('-')[::-1])
 
