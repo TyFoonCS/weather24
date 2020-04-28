@@ -68,12 +68,21 @@
 
         <div class="card">
         <div class="card-image">
-          <img src=" {{ alerts_back }} " class="alert_img">
-          <span class="card-title">Card Title</span>
-          <a class="btn-floating halfway-fab waves-effect waves-light orange"><i class="material-icons">add</i></a>
+            <img src=" {{ alerts_back }} " class="alert_img">
+            <span class="card-title">Card Title</span>
         </div>
         <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+            <div class="row">
+                <div class="input-field col s10 m11">
+                    <input id="rec_input" type="text" class="validate">
+                    <label for="rec_input">Ваше пожелание</label>
+                </div>
+                <div class="col s2 m1">
+                     <button class="btn-floating waves-effect waves-light orange" type="submit" name="action">
+                        <i class="material-icons">add</i>
+                     </button>
+                </div>
+            </div>
         </div>
         </div>
         </div>
