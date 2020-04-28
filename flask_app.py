@@ -179,6 +179,7 @@ def wet():
                                  date=date,
                                  masha=get_masha(),
                                  alerts_back=alerts_back,
+                                 card=card,
                                  back=back,
                                  font=font,
                                  icon=weather['icon']

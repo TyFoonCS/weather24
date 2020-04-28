@@ -24,8 +24,24 @@
             width: 100%;
         }
         .card-content {
+            margin: 0 auto;
             text-align: center;
             color: {{ font }};
+        }
+        .input-field label {
+            color: {{ font }};
+        }
+        .input-field input[type=text]{
+            color: {{ font }};
+            border-bottom: 1px solid {{ font }};
+            box-shadow: 0 1px 0 0 {{ font }};
+        }
+        .input-field input[type=text]:focus + label {
+            color: orange !important;
+        }
+        .input-field input[type=text]:focus {
+            border-bottom: 1px solid orange !important;
+            box-shadow: 0 1px 0 0 orange !important;
         }
         .pymy {
             display: flex;
@@ -49,7 +65,7 @@
 <div class="pymy">
     <div class="row">
         <div class="my_col">
-            <div class="card """ + card + """ darken-3">
+            <div class=" {{ card }} ">
                 <div class="card-image">
                     <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/{{ icon }}.svg" class="her">
                 </div>
@@ -66,22 +82,24 @@
                 </div>
             </div>
 
-        <div class="card">
+        <div class=" {{ card }} ">
         <div class="card-image">
             <img src=" {{ alerts_back }} " class="alert_img">
             <span class="card-title">Card Title</span>
         </div>
         <div class="card-content">
             <div class="row">
-                <div class="input-field col s10 m11">
-                    <input id="rec_input" type="text" class="validate">
-                    <label for="rec_input">Ваше пожелание</label>
-                </div>
-                <div class="col s2 m1">
-                     <button class="btn-floating waves-effect waves-light orange" type="submit" name="action">
-                        <i class="material-icons">add</i>
-                     </button>
-                </div>
+                <form>
+                    <div class="input-field col s10 m11">
+                        <input id="rec_input" type="text" data-length="100">
+                        <label for="rec_input">Ваше пожелание</label>
+                    </div>
+                    <div class="col s2 m1">
+                         <button class="btn-floating waves-effect waves-light orange" type="submit" name="action">
+                            <i class="material-icons">add</i>
+                         </button>
+                    </div>
+                </form>
             </div>
         </div>
         </div>
