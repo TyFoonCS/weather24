@@ -161,17 +161,24 @@ def main():
 @app.route('/', methods=['GET', 'POST'])
 def wet():
     wish = False
-    conn = sqlite3.connect("data.db")
-    cursor = conn.cursor()
 
     if flask.request.method == 'POST':
         wish = mat_filter(flask.request.form.get('wish'))
-        cursor.execute("insert into wishes values('" + wish + "');")
-        conn.commit()
+        data_wish = open('req.json', 'r', encoding="utf-8")
+        now_wish = json.loads(data_wish.read())
+        data_wish.close()
+        now_wish['wishes'] = now_wish['wishes'] + ";;" + wish
+        data_wish = open('req.json', 'w', encoding="utf-8")
+        data_wish.write(str(json.dumps(now_wish)))
+        data_wish.close()
+
     if not wish:
-        cursor.execute("select * from wishes")
-        wishes = cursor.fetchall()[0]
-        wish = random.choice(wishes)
+        data_wish = open('req.json', 'r', encoding="utf-8")
+        now_wish = json.loads(data_wish.read())
+        data_wish.close()
+        wish = random.choice(now_wish['wishes'].split(';;'))
+        print(wish)
+
 
     weather = now['fact']
     date = '.'.join(now['date'][:10].split('-')[::-1])
