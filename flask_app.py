@@ -143,7 +143,7 @@ if abs(int(time.time()) - int(now['now'])) > 3600:  # - 3
     data = open('req.json', 'w')
     data.write(str(get_weather()))
     data.close()
-    data = open('req.json', 'r') # /home/Timurg3000/mysite/
+    data = open('req.json', 'r')  # /home/Timurg3000/mysite/
     now = json.loads(data.read())
     data.close()
 
@@ -160,8 +160,7 @@ def main():
 @app.route('/', methods=['GET'])
 def wet():
     weather = now['fact']
-    date = now['date'][:10].split('-')
-    date.reverse()
+    date = '.'.join(now['date'][:10].split('-')[::-1])
 
     if weather['daytime'] == 'd':
         card = "card"
@@ -173,91 +172,17 @@ def wet():
         back = "https://img5.goodfon.ru/original/2560x1600/9/5a/gora-gory-mount-mounts-luna-moon-mesiats-zakat-dymnoe-nebo-o.jpg"
         font = "white"
         alerts_back = "https://s1.1zoom.ru/big3/687/Milky_Way_Lake_Stars_Sky_458932.jpg"
-    return """
-<html>
-<head>
-    <meta charset="utf-8">
-    <title> Погода 24 </title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css" media="screen,projection"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <style>
-        .her {
-            height: 280;
-            width: 600px;
-            display: block;
-            margin: 0 auto;
-            border: none;
-        }
-        .alert_img {
-        }
-        .my_col {
-            height: 100%;
-            margin: 10px;
-        }
-        .my_col_alerts {
-            height: 583.5px;
-            width: 100%;
-        }
-        .card-content {
-            text-align: center;
-            color: """ + font + """;
-        }
-        .pymy {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .temp {
-            font-size: 75px;
-        }
-        .card-action {
-            text-align: center;
-        }
-        body {
-            background-image: url(""" + back + """);
-        }
-    </style>
-</head>
-<body>
-<script type="text/javascript" src="static/js/materialize.min.js"></script>
 
-<div class="pymy">
-    <div class="row">
-        <div class="my_col">
-            <div class="card """ + card + """ darken-3">
-                <div class="card-image">
-                    <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/""" + weather['icon'] + """.svg" class="her">
-                </div>
-                <div class="main_con">
-                <div class="card-content">
-                    <p class="temp">""" + str(weather['temp']) + """°С</p>
-                    <p>Чувствуется как: """ + str(weather['feels_like']) + """°С</p>
-                    <p>Скорость ветра: """ + str(weather['wind_speed']) + """ м/с</p>
-                    <p> Дата обновления: """ + '.'.join(date) + """</p>
-                </div>
-                </div>
-                <div class="card-action">
-                    <a href="http://timurg3000.pythonanywhere.com/" class="act">""" + get_masha() + """</a>
-                </div>
-            </div>
-        
-        <div class="card">
-        <div class="card-image">
-          <img src=" """ + alerts_back + """ " class="alert_img">
-          <span class="card-title">Card Title</span>
-          <a class="btn-floating halfway-fab waves-effect waves-light orange"><i class="material-icons">add</i></a>
-        </div>
-        <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-        </div>
-        </div>
-        </div>
-    </div>
-</div>
-</body>
-</html>
-"""
+    return flask.render_template('index.html', temp=weather['temp'],
+                                 feels_like=weather['feels_like'],
+                                 wind_speed=weather['wind_speed'],
+                                 date=date,
+                                 masha=get_masha(),
+                                 alerts_back=alerts_back,
+                                 back=back,
+                                 font=font,
+                                 icon=weather['icon']
+                                 )
 
 
 if __name__ == '__main__':

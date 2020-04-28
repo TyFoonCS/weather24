@@ -25,7 +25,7 @@
         }
         .card-content {
             text-align: center;
-            color: """ + font + """;
+            color: {{ font }};
         }
         .pymy {
             display: flex;
@@ -39,7 +39,7 @@
             text-align: center;
         }
         body {
-            background-image: url(""" + back + """);
+            background-image: url( {{ back }} );
         }
     </style>
 </head>
@@ -51,24 +51,24 @@
         <div class="my_col">
             <div class="card """ + card + """ darken-3">
                 <div class="card-image">
-                    <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/""" + weather['icon'] + """.svg" class="her">
+                    <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/{{ icon }}.svg" class="her">
                 </div>
                 <div class="main_con">
                 <div class="card-content">
-                    <p class="temp">""" + str(weather['temp']) + """°С</p>
-                    <p>Чувствуется как: """ + str(weather['feels_like']) + """°С</p>
-                    <p>Скорость ветра: """ + str(weather['wind_speed']) + """ м/с</p>
-                    <p> Дата обновления: """ + '.'.join(date) + """</p>
+                    <p class="temp"> {{ temp }}°С</p>
+                    <p>Чувствуется как: {{ feels_like }}°С</p>
+                    <p>Скорость ветра: {{ wind_speed }} м/с</p>
+                    <p> Дата обновления: {{ date }}</p>
                 </div>
                 </div>
                 <div class="card-action">
-                    <a href="http://timurg3000.pythonanywhere.com/" class="act">""" + get_masha() + """</a>
+                    <a href="http://timurg3000.pythonanywhere.com/" class="act"> {{ masha }} </a>
                 </div>
             </div>
 
         <div class="card">
         <div class="card-image">
-          <img src=" """ + alerts_back + """ " class="alert_img">
+          <img src=" {{ alerts_back }} " class="alert_img">
           <span class="card-title">Card Title</span>
           <a class="btn-floating halfway-fab waves-effect waves-light orange"><i class="material-icons">add</i></a>
         </div>
