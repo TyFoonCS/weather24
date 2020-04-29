@@ -131,18 +131,22 @@ def get_weather():
     for don in donat_res['donates']:
         don['msg'] = mat_filter(don['msg'])
     res.update(donat_res.copy())
-    return json.dumps(res)
+    return res
 
 
 logging.basicConfig(level=logging.INFO)
 
 data = open('req.json', 'r')
 now = json.loads(data.read())
+wishes = {'wishes': now['wishes']}
+print(wishes)
 data.close()
 
 if abs(int(time.time()) - int(now['now'])) > 3600:  # - 3
     data = open('req.json', 'w')
-    data.write(str(get_weather()))
+    to_write = get_weather()
+    to_write.update(wishes)
+    data.write(json.dumps(to_write))
     data.close()
     data = open('req.json', 'r')  # /home/Timurg3000/mysite/
     now = json.loads(data.read())
@@ -176,6 +180,7 @@ def wet():
         data_wish = open('req.json', 'r', encoding="utf-8")
         now_wish = json.loads(data_wish.read())
         data_wish.close()
+        print(now_wish)
         wish = random.choice(now_wish['wishes'].split(';;'))
         print(wish)
 
