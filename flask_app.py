@@ -185,6 +185,8 @@ def wet():
         now_wish = json.loads(data_wish.read())
         data_wish.close()
         wish = mat_filter(flask.request.form.get('wish')).replace(';', '')
+        if not wish.replace(' ', ''):
+            wish = False
         if wish:
             now_wish['wishes'] = now_wish['wishes'] + ";;" + wish
             wish = random.choices(now_wish['wishes'].split(";;"), k=4)
