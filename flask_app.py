@@ -7,6 +7,19 @@ import json
 from datetime import datetime
 import time
 
+carousel_day = (
+    "https://sun9-23.userapi.com/c206824/v206824763/109840/Mcz8_4-icd8.jpg",
+    "https://sun9-50.userapi.com/c206820/v206820157/10b2e6/eyQ7ijd_Mb0.jpg",
+    "https://pbs.twimg.com/media/CvdDhFKWYAAeOeZ.jpg:large",
+    "https://www.ardysia.com/wp-content/uploads/canada_lake_louise_1920x1080.jpg"
+)
+carousel_night = (
+    "https://img5.goodfon.ru/original/2560x1600/9/5a/gora-gory-mount-mounts-luna-moon-mesiats-zakat-dymnoe-nebo-o.jpg",
+    "https://images.wallpapersden.com/image/download/poly-lakeside-minimal_57569_3840x2400.jpg",
+    "https://images.wallpapersden.com/image/download/firewatch-sunset-artwork_57845_3840x2400.jpg",
+    "https://images.wallpapersden.com/image/download/firewatch-sunset-artwork_57845_3840x2400.jpg"
+)
+
 
 def mat_filter(msg):
     mat = ['6ля', '6лядь', '6лять', 'b3ъeб', 'cock', 'cunt', 'e6aль', 'ebal', 'eblan', 'eбaл', 'eбaть', 'eбyч', 'eбать',
@@ -123,7 +136,7 @@ def get_weather():
                             params={"key": "e79dce2a3546e97874ac", "action": "donates"})
     weather = json.loads(weather.text)
     res = {}
-    donat_res = {}
+    donat_res = dict()
     res['fact'] = weather['fact'].copy()
     res['now'] = weather['now']
     res['date'] = weather['now_dt']
@@ -195,11 +208,13 @@ def wet():
         back = "http://www.fonstola.ru/pic/201310/2560x1600/fonstola.ru-132983.jpg"
         font = "black"
         alerts_back = "https://www.culture.ru/storage/images/8ba9d7a028dfc838942957ef12f67936/8234d8564039f6a12306998f9f61eac5.jpg"
+        carousel_pics = carousel_day
     else:
         card = "card #4527a0 deep-purple darken-3"
         back = "https://img5.goodfon.ru/original/2560x1600/9/5a/gora-gory-mount-mounts-luna-moon-mesiats-zakat-dymnoe-nebo-o.jpg"
         font = "white"
         alerts_back = "https://s1.1zoom.ru/big3/687/Milky_Way_Lake_Stars_Sky_458932.jpg"
+        carousel_pics = carousel_night
 
     return flask.render_template('index.html', temp=weather['temp'],
                                  feels_like=weather['feels_like'],
@@ -211,7 +226,8 @@ def wet():
                                  back=back,
                                  font=font,
                                  icon=weather['icon'],
-                                 wish=wish
+                                 wish=wish,
+                                 carousel_pics=carousel_pics
                                  )
 
 
