@@ -166,12 +166,15 @@ def main():
 def wet():
     wish = False
 
-    if flask.request.method == 'POST':
-        wish = mat_filter(flask.request.form.get('wish'))
+    if flask.request.method == 'POST' and flask.request.form.get('wish'):
+        mat_filter(flask.request.form.get('wish'))
         data_wish = open('req.json', 'r', encoding="utf-8")
         now_wish = json.loads(data_wish.read())
         data_wish.close()
-        now_wish['wishes'] = now_wish['wishes'] + " " + wish
+        wish = mat_filter(flask.request.form.get('wish'))
+        now_wish['wishes'] = now_wish['wishes'] + ";;" + wish
+        wish = random.choices(now_wish['wishes'].split(";;"), k=4)
+        wish[0] = mat_filter(flask.request.form.get('wish'))
         data_wish = open('req.json', 'w', encoding="utf-8")
         data_wish.write(str(json.dumps(now_wish)))
         data_wish.close()
@@ -181,8 +184,8 @@ def wet():
         now_wish = json.loads(data_wish.read())
         data_wish.close()
         print(now_wish)
-        wish = random.choices(now_wish['wishes'].split(), k=4)
-        print(wish)
+        wish = random.choices(now_wish['wishes'].split(";;"), k=4)
+        print(wish, 144)
 
     weather = now['fact']
     date = '.'.join(now['date'][:10].split('-')[::-1])
