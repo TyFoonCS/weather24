@@ -184,13 +184,14 @@ def wet():
         data_wish = open('req.json', 'r', encoding="utf-8")
         now_wish = json.loads(data_wish.read())
         data_wish.close()
-        wish = mat_filter(flask.request.form.get('wish'))
-        now_wish['wishes'] = now_wish['wishes'] + ";;" + wish
-        wish = random.choices(now_wish['wishes'].split(";;"), k=4)
-        wish[0] = mat_filter(flask.request.form.get('wish'))
-        data_wish = open('req.json', 'w', encoding="utf-8")
-        data_wish.write(str(json.dumps(now_wish)))
-        data_wish.close()
+        wish = mat_filter(flask.request.form.get('wish')).replace(';', '')
+        if wish:
+            now_wish['wishes'] = now_wish['wishes'] + ";;" + wish
+            wish = random.choices(now_wish['wishes'].split(";;"), k=4)
+            wish[0] = mat_filter(flask.request.form.get('wish'))
+            data_wish = open('req.json', 'w', encoding="utf-8")
+            data_wish.write(str(json.dumps(now_wish)))
+            data_wish.close()
 
     if not wish:
         data_wish = open('req.json', 'r', encoding="utf-8")
