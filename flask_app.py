@@ -1,10 +1,8 @@
 import flask
-import sqlite3
 import random
 import logging
 import requests
 import json
-from datetime import datetime
 import time
 
 carousel_day = (
