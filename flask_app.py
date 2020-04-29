@@ -171,7 +171,7 @@ def wet():
         data_wish = open('req.json', 'r', encoding="utf-8")
         now_wish = json.loads(data_wish.read())
         data_wish.close()
-        now_wish['wishes'] = now_wish['wishes'] + ";;" + wish
+        now_wish['wishes'] = now_wish['wishes'] + " " + wish
         data_wish = open('req.json', 'w', encoding="utf-8")
         data_wish.write(str(json.dumps(now_wish)))
         data_wish.close()
@@ -181,7 +181,7 @@ def wet():
         now_wish = json.loads(data_wish.read())
         data_wish.close()
         print(now_wish)
-        wish = random.choices(now_wish['wishes'].split(';;'), k=4)
+        wish = random.choices(now_wish['wishes'].split(), k=4)
         print(wish)
 
     weather = now['fact']
