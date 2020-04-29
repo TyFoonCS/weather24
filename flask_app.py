@@ -181,7 +181,7 @@ def wet():
         now_wish = json.loads(data_wish.read())
         data_wish.close()
         print(now_wish)
-        wish = random.choice(now_wish['wishes'].split(';;'))
+        wish = random.choices(now_wish['wishes'].split(';;'), k=4)
         print(wish)
 
     weather = now['fact']
