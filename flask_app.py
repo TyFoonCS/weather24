@@ -4,6 +4,7 @@ import logging
 import requests
 import json
 import time
+import os
 
 carousel_day = (
     "static/images/d1.jpg",
@@ -17,6 +18,22 @@ carousel_night = (
     "static/images/n3.jpg",
     "static/images/n4.jpg"
 )
+
+
+def get_pics(day):
+    if day:
+        word = 'd'
+    else:
+        word = 'n'
+    images = os.listdir(path="static/images")
+    pics = list()
+    for image in images:
+        if image[0] == word and "static/images/" + image not in pics:
+            pics.append("static/images/" + image)
+    res = random.choices(pics, k=4)
+    while len(set(res)) != 4:
+        res = random.choices(pics, k=4)
+    return res
 
 
 def mat_filter(msg):
@@ -209,13 +226,13 @@ def wet():
         back = "http://www.fonstola.ru/pic/201310/2560x1600/fonstola.ru-132983.jpg"
         font = "black"
         alerts_back = "https://www.culture.ru/storage/images/8ba9d7a028dfc838942957ef12f67936/8234d8564039f6a12306998f9f61eac5.jpg"
-        carousel_pics = carousel_day
+        carousel_pics = get_pics(True)
     else:
         card = "card #4527a0 deep-purple darken-3"
         back = "https://img5.goodfon.ru/original/2560x1600/9/5a/gora-gory-mount-mounts-luna-moon-mesiats-zakat-dymnoe-nebo-o.jpg"
         font = "white"
         alerts_back = "https://s1.1zoom.ru/big3/687/Milky_Way_Lake_Stars_Sky_458932.jpg"
-        carousel_pics = carousel_night
+        carousel_pics = get_pics(False)
 
     return flask.render_template('index.html', temp=weather['temp'],
                                  feels_like=weather['feels_like'],
