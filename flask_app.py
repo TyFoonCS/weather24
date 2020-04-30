@@ -126,8 +126,8 @@ def mat_filter(msg):
            'хуище', 'хуля', 'хую', 'хуюл', 'хуя', 'хуяк', 'хуякать', 'хуякнуть', 'хуяра', 'хуясе', 'хуячить', 'целка',
            'чмо', 'чмошник', 'чмырь', 'шалава', 'шалавой', 'шараёбиться', 'шлюха', 'шлюхой', 'шлюшка', 'ябывает']
     for bad in mat:
-        if bad in msg:
-            msg = msg.replace(bad, "***")
+        if bad in msg.lower():
+            msg = "***"
     return msg
 
 
@@ -195,12 +195,11 @@ def wet():
     wish = False
 
     if flask.request.method == 'POST' and flask.request.form.get('wish'):
-        mat_filter(flask.request.form.get('wish'))
         data_wish = open('req.json', 'r', encoding="utf-8")
         now_wish = json.loads(data_wish.read())
         data_wish.close()
         wish = mat_filter(flask.request.form.get('wish')).replace(';', '')
-        if not wish.replace(' ', ''):
+        if not wish.replace(' ', '') or "***" == mat_filter(wish):
             wish = False
         if wish:
             now_wish['wishes'] = now_wish['wishes'] + ";;" + wish
