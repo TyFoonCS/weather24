@@ -6,16 +6,16 @@ import json
 import time
 
 carousel_day = (
-    "https://sun9-23.userapi.com/c206824/v206824763/109840/Mcz8_4-icd8.jpg",
-    "https://sun9-50.userapi.com/c206820/v206820157/10b2e6/eyQ7ijd_Mb0.jpg",
-    "https://pbs.twimg.com/media/CvdDhFKWYAAeOeZ.jpg:large",
-    "https://www.ardysia.com/wp-content/uploads/canada_lake_louise_1920x1080.jpg"
+    "static/images/d1.jpg",
+    "static/images/d2.jpg",
+    "static/images/d3.jpg",
+    "static/images/d4.jpg"
 )
 carousel_night = (
-    "https://img5.goodfon.ru/original/2560x1600/9/5a/gora-gory-mount-mounts-luna-moon-mesiats-zakat-dymnoe-nebo-o.jpg",
-    "https://images.wallpapersden.com/image/download/poly-lakeside-minimal_57569_3840x2400.jpg",
-    "https://images.wallpapersden.com/image/download/firewatch-sunset-artwork_57845_3840x2400.jpg",
-    "https://images.wallpapersden.com/image/download/firewatch-sunset-artwork_57845_3840x2400.jpg"
+    "static/images/n1.jpg",
+    "static/images/n2.jpg",
+    "static/images/n3.jpg",
+    "static/images/n4.jpg"
 )
 
 
