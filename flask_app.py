@@ -204,6 +204,8 @@ def wet():
         if wish:
             now_wish['wishes'] = now_wish['wishes'] + ";;" + wish
             wish = random.choices(now_wish['wishes'].split(";;"), k=4)
+            while len(set(wish)) != 4:
+                wish = random.choices(now_wish['wishes'].split(";;"), k=4)
             wish[0] = mat_filter(flask.request.form.get('wish'))
             data_wish = open('req.json', 'w', encoding="utf-8")
             data_wish.write(str(json.dumps(now_wish)))
@@ -215,6 +217,8 @@ def wet():
         data_wish.close()
         print(now_wish)
         wish = random.choices(now_wish['wishes'].split(";;"), k=4)
+        while len(set(wish)) != 4:
+            wish = random.choices(now_wish['wishes'].split(";;"), k=4)
         print(wish, 144)
 
     weather = now['fact']
