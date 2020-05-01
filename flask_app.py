@@ -227,13 +227,11 @@ def wet():
         card = "card"
         back = "back_day.jpg"
         font = "black"
-        alerts_back = "https://www.culture.ru/storage/images/8ba9d7a028dfc838942957ef12f67936/8234d8564039f6a12306998f9f61eac5.jpg"
         carousel_pics = get_pics(True)
     else:
         card = "card #4527a0 deep-purple darken-3"
         back = "static/images/n1.jpg"
         font = "white"
-        alerts_back = "https://s1.1zoom.ru/big3/687/Milky_Way_Lake_Stars_Sky_458932.jpg"
         carousel_pics = get_pics(False)
 
     weather_script = dict()
@@ -250,7 +248,6 @@ def wet():
                                  wind_speed=weather['wind_speed'],
                                  date=date,
                                  masha=get_masha(),
-                                 alerts_back=alerts_back,
                                  card=card,
                                  back=back,
                                  font=font,
