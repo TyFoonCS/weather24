@@ -5,6 +5,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css" media="screen,projection"/>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script type="text/javascript" src="static/js/ajax.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <style>
         .her {
@@ -64,9 +65,16 @@
         .carousel {
             width: 95vw;
         }
+        .small material-icons{
+            font-size: 5px;
+        }
         body {
             background-image: url( {{ back }} );
         }
+
+
+
+
     </style>
 </head>
 <body>
@@ -80,26 +88,32 @@
                     <img src="https://yastatic.net/weather/i/icons/blueye/color/svg/{{ icon }}.svg" class="her">
                 </div>
                 <div class="main_con">
-                <div class="card-content">
-                    <p class="temp"> {{ temp }}°С</p>
-                    <p>Чувствуется как: {{ feels_like }}°С</p>
-                    <p>Скорость ветра: {{ wind_speed }} м/с</p>
-                    <p> Дата обновления: {{ date }}</p>
-                    <p> Данные предоставлены по городу Ижевску </p>
-                </div>
+                    <div class="card-content">
+                        <p class="temp"> {{ temp }}°С</p>
+                        <p>Чувствуется как: {{ feels_like }}°С</p>
+                        <p>Скорость ветра: {{ wind_speed }} м/с</p>
+                        <p> Дата обновления: {{ date }}</p>
+                        <p> Данные предоставлены по городу Ижевску </p>
+                    </div>
                 </div>
                 <div class="card-action">
                     <a href="http://timurg3000.pythonanywhere.com/" class="act"> {{ masha }} </a>
                 </div>
             </div>
 
-        <div class=" {{ card }} ">
+            <div class=" {{ card }} ">
                 <div class="carousel carousel-slider">
                     <div class="carousel-arrow align-left" style="left: 5px">
-                        <form onsubmit="CarouselLeft(); return false;"><button class="btn-floating waves-effect waves-light orange"><i class="material-icons">arrow_back</i></button></form>
+                        <form onsubmit="CarouselLeft(); return false;">
+                            <button class="btn-floating waves-effect waves-light orange"><i class="material-icons">arrow_back</i>
+                            </button>
+                        </form>
                     </div>
                     <div class="carousel-arrow align-right" style="right: 5px">
-                        <form onsubmit="CarouselRight(); return false;"><button class="btn-floating waves-effect waves-light orange"><i class="material-icons">arrow_forward</i></button></form>
+                        <form onsubmit="CarouselRight(); return false;">
+                            <button class="btn-floating waves-effect waves-light orange"><i class="material-icons">arrow_forward</i>
+                            </button>
+                        </form>
                     </div>
 
                     <script type="text/javascript" src="static/js/arrow.js"></script>
@@ -109,12 +123,18 @@
                             <img class="carimg" src="{{ carousel_pics[0] }}">
                             <span class="card-title">
                                 {{ wish[0] }}
-                                <button class="btn-floating waves-effect waves-light red" type="submit" name="action">
-                                    <i class="material-icons">favorite</i>
+                            <form method="post" action="" id="ajax_form">
+                                <input type="hidden" name="like" value="1">
+                                <button class="waves-effect waves-light red btn-small" type="submit" name="action">
+                                    <i class="small material-icons">favorite</i>
                                 </button>
-                                <button class="btn-floating waves-effect waves-light #212121 grey darken-4" type="submit" name="action">
+                                <button class="btn-floating waves-effect waves-light #212121 grey darken-4"
+                                        type="submit"
+                                        name="action">
                                     <i class="material-icons">exposure_neg_1</i>
                                 </button>
+                                <span class="blue-text text-darken-2">100</span>
+                            </form>
                             </span>
                         </div>
                     </div>
@@ -126,7 +146,8 @@
                                 <button class="btn-floating waves-effect waves-light red" type="submit" name="action">
                                     <i class="material-icons">favorite</i>
                                 </button>
-                                <button class="btn-floating waves-effect waves-light #212121 grey darken-4" type="submit" name="action">
+                                <button class="btn-floating waves-effect waves-light #212121 grey darken-4"
+                                        type="submit" name="action">
                                     <i class="material-icons">exposure_neg_1</i>
                                 </button>
                             </span>
@@ -140,7 +161,8 @@
                                 <button class="btn-floating waves-effect waves-light red" type="submit" name="action">
                                     <i class="material-icons">favorite</i>
                                 </button>
-                                <button class="btn-floating waves-effect waves-light #212121 grey darken-4" type="submit" name="action">
+                                <button class="btn-floating waves-effect waves-light #212121 grey darken-4"
+                                        type="submit" name="action">
                                     <i class="material-icons">exposure_neg_1</i>
                                 </button>
                             </span>
@@ -154,7 +176,8 @@
                                 <button class="btn-floating waves-effect waves-light red" type="submit" name="action">
                                     <i class="material-icons">favorite</i>
                                 </button>
-                                <button class="btn-floating waves-effect waves-light #212121 grey darken-4" type="submit" name="action">
+                                <button class="btn-floating waves-effect waves-light #212121 grey darken-4"
+                                        type="submit" name="action">
                                     <i class="material-icons">exposure_neg_1</i>
                                 </button>
                             </span>
@@ -162,24 +185,25 @@
                     </div>
                 </div>
 
-            <script type="text/javascript" src="static/js/car.js"></script>
+                <script type="text/javascript" src="static/js/car.js"></script>
 
-        <div class="card-content">
-            <div class="row">
-                <form action="" method="post">
-                    <div class="input-field col s10 m11">
-                        <input id="rec_input" type="text" data-length="100" name="wish">
-                        <label for="rec_input">Ваше пожелание</label>
+                <div class="card-content">
+                    <div class="row">
+                        <form action="" method="post">
+                            <div class="input-field col s10 m11">
+                                <input id="rec_input" type="text" data-length="100" name="wish">
+                                <label for="rec_input">Ваше пожелание</label>
+                            </div>
+                            <div class="col s2 m1">
+                                <button class="btn-floating waves-effect waves-light orange" type="submit"
+                                        name="action">
+                                    <i class="material-icons">add</i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col s2 m1">
-                         <button class="btn-floating waves-effect waves-light orange" type="submit" name="action">
-                            <i class="material-icons">add</i>
-                         </button>
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
-        </div>
         </div>
     </div>
 </div>

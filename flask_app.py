@@ -192,13 +192,15 @@ def main():
 
 @app.route('/', methods=['GET', 'POST'])
 def wet():
-    wish = False
+    if flask.request.method == 'POST' and flask.request.form.get('like'):
+        print(flask.request.form.get('wish'), 666)
 
+    wish = False
     if flask.request.method == 'POST' and flask.request.form.get('wish'):
         data_wish = open('req.json', 'r', encoding="utf-8")
         now_wish = json.loads(data_wish.read())
         data_wish.close()
-        wish = mat_filter(flask.request.form.get('wish')).replace(';', '')
+        wish = mat_filter(flask.request.form.get('wish')).replace(';', '').replace('&', '')
         if not wish.replace(' ', '') or "***" == mat_filter(wish):
             wish = False
         if wish:
