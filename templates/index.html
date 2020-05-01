@@ -187,38 +187,7 @@
         </div>
     </div>
 </div>
-<script>
-
-	function random(min, max) {
-
-		var rand = min + Math.random() * (max + 1 - min);
-		rand = Math.floor(rand);
-
-		return rand;
-
-	}
-
-	for (var i=0; i<200; i++) {
-
-		document.getElementsByTagName('body')[0].innerHTML += '<i class="rain" style="left: '+random(-2000, 2000)+'px;transform: translate3d(0, 0, 0);animation-delay: '+(0.01 * i)+'s"></i>';
-
-	}
-
-</script>
-
-<script src="../static/js/snowstorm-min.js"></script>
-
-<script>
-
-	window.onload = function() {
-
-		snowStorm.snowColor = "#fff"; // Цвет снежинок
-		snowStorm.flakesMaxActive = 100; // Максимальное количество видимых снежинок
-		snowStorm.followMouse = true; // true - гоняться за курсором, false - нет
-		snowStorm.snowCharacter = "&bull;"; // Вид снежинки
-
-	};
-
-</script>
+<script src="{{ weather_script['rain'] }}"></script>
+<script src="{{ weather_script['snow'] }}"></script>
 </body>
 </html>

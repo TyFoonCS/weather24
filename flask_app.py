@@ -237,6 +237,15 @@ def wet():
         alerts_back = "https://s1.1zoom.ru/big3/687/Milky_Way_Lake_Stars_Sky_458932.jpg"
         carousel_pics = get_pics(False)
 
+    weather_script = dict()
+    if weather['condition'] == "overcast-and-wet-snow":
+        weather_script['rain'] = "static/js/rain.js"
+        weather_script['snow'] = "static/js/snowstorm-min.js"
+    elif "rain" in weather['condition']:
+        weather_script['rain'] = "static/js/rain.js"
+    elif "snow" in weather['condition']:
+        weather_script['snow'] = "static/js/snowstorm-min.js"
+
     return flask.render_template('index.html', temp=weather['temp'],
                                  feels_like=weather['feels_like'],
                                  wind_speed=weather['wind_speed'],
@@ -248,7 +257,8 @@ def wet():
                                  font=font,
                                  icon=weather['icon'],
                                  wish=wish,
-                                 carousel_pics=carousel_pics
+                                 carousel_pics=carousel_pics,
+                                 weather_script=weather_script
                                  )
 
 
