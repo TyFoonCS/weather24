@@ -167,7 +167,6 @@ logging.basicConfig(level=logging.INFO)
 data = open('req.json', 'r')
 now = json.loads(data.read())
 wishes = {'wishes': now['wishes']}
-print(wishes)
 data.close()
 
 if abs(int(time.time()) - int(now['now'])) > 3600:  # - 3
@@ -206,7 +205,8 @@ def wet():
             wish = random.choices(now_wish['wishes'].split(";;"), k=4)
             while len(set(wish)) != 4:
                 wish = random.choices(now_wish['wishes'].split(";;"), k=4)
-            wish[0] = mat_filter(flask.request.form.get('wish'))
+                wish[0] = mat_filter(flask.request.form.get('wish'))
+            print(len(set(wish)))
             data_wish = open('req.json', 'w', encoding="utf-8")
             data_wish.write(str(json.dumps(now_wish)))
             data_wish.close()
@@ -215,24 +215,23 @@ def wet():
         data_wish = open('req.json', 'r', encoding="utf-8")
         now_wish = json.loads(data_wish.read())
         data_wish.close()
-        print(now_wish)
         wish = random.choices(now_wish['wishes'].split(";;"), k=4)
         while len(set(wish)) != 4:
             wish = random.choices(now_wish['wishes'].split(";;"), k=4)
-        print(wish, 144)
+        print(len(set(wish)))
 
     weather = now['fact']
     date = '.'.join(now['date'][:10].split('-')[::-1])
 
     if weather['daytime'] == 'd':
         card = "card"
-        back = "http://www.fonstola.ru/pic/201310/2560x1600/fonstola.ru-132983.jpg"
+        back = "back_day.jpg"
         font = "black"
         alerts_back = "https://www.culture.ru/storage/images/8ba9d7a028dfc838942957ef12f67936/8234d8564039f6a12306998f9f61eac5.jpg"
         carousel_pics = get_pics(True)
     else:
         card = "card #4527a0 deep-purple darken-3"
-        back = "https://img5.goodfon.ru/original/2560x1600/9/5a/gora-gory-mount-mounts-luna-moon-mesiats-zakat-dymnoe-nebo-o.jpg"
+        back = "static/images/n1.jpg"
         font = "white"
         alerts_back = "https://s1.1zoom.ru/big3/687/Milky_Way_Lake_Stars_Sky_458932.jpg"
         carousel_pics = get_pics(False)
