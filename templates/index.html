@@ -101,22 +101,8 @@
                     <div class="carousel-arrow align-right" style="right: 5px">
                         <form onsubmit="CarouselRight(); return false;"><button class="btn-floating waves-effect waves-light orange"><i class="material-icons">arrow_forward</i></button></form>
                     </div>
-                    <script type="text/javascript">
-                        function CarouselRight(){
-                            $('.carousel.carousel-slider').carousel('next');
-                            clearTimeout(carouselTimeout);
-                            carouselTimeout = setTimeout(autoplay, 10000, false);
-                        }
-                        function CarouselLeft(){
-                            $('.carousel.carousel-slider').carousel('prev');
-                            clearTimeout(carouselTimeout);
-                            carouselTimeout = setTimeout(autoplay, 10000, false);
-                        }
-                        function autoplay(isFirst) {
-                            if (!isFirst) $('.carousel').carousel('next');
-                            carouselTimeout = setTimeout(autoplay, 10000, false);
-                        }
-                    </script>
+
+                    <script type="text/javascript" src="static/js/arrow.js"></script>
 
                     <div class="carousel-item">
                         <div class="card-image">
@@ -175,14 +161,8 @@
                         </div>
                     </div>
                 </div>
-                <script type="text/javascript">
-                    $(document).ready(function(){
-                        $('.carousel.carousel-slider').carousel({
-                            fullWidth: true,
-                        });
-                        autoplay(true);
-                    });
-                </script>
+
+            <script type="text/javascript" src="static/js/car.js"></script>
 
         <div class="card-content">
             <div class="row">
