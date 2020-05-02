@@ -1,19 +1,8 @@
-import os
-import random
-
-
-def get_pics(day):
-    if day:
-        word = 'd'
-    else:
-        word = 'n'
-    images = os.listdir(path="static/images")
-    res = list()
-    for image in images:
-        if image[0] == word:
-            res.append(image)
-    res = random.choices(res, k=4)
-    return res
-
-
-print(get_pics(False))
+d = {'clear': 'ясно', 'partly-cloudy': 'малооблачно', 'cloudy': 'облачно с прояснениями', 'overcast': 'пасмурно',
+     'partly-cloudy-and-light-rain': 'небольшой дождь', 'partly-cloudy-and-rain': 'дождь',
+     'overcast-and-rain': 'сильный дождь', 'overcast-thunderstorms-with-rain': 'сильный дождь, гроза',
+     'cloudy-and-light-rain': 'небольшой дождь', 'overcast-and-light-rain': 'небольшой дождь',
+     'cloudy-and-rain': 'дождь', 'overcast-and-wet-snow': 'дождь со снегом',
+     'partly-cloudy-and-light-snow': 'небольшой снег', 'partly-cloudy-and-snow': 'снег',
+     'overcast-and-snow': 'снегопад', 'cloudy-and-light-snow': 'небольшой снег',
+     'overcast-and-light-snow': 'небольшой снег', 'cloudy-and-snow': 'снег'}
